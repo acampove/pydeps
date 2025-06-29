@@ -184,11 +184,11 @@ class GraphNode:
 
 
 class Graph:
-    # def __init__(self, vertices: list[GraphNode], edges: list[tuple[GraphNode, GraphNode]]):
     def __init__(self, vertices: list, edges: list):
-        self.V = vertices
+        self.V     = vertices
         for i, v in enumerate(vertices):
             v.index = i
+
         self.edges = edges
         self.neighbours = defaultdict(list)
         for u, v in edges:
@@ -212,7 +212,6 @@ class Graph:
             if not visited[neighbour.index]:
                 self.dfs(neighbour, visited, stack)
         stack.append(v)
-
 
     def fill_order(self):
         def _fill_order(visited, stack):
@@ -546,5 +545,4 @@ class DepGraph(object):
             src.imported_by = [m for m in src.imported_by if not self._exclude(m)]
 
     def _add_skip(self, name):
-        # print 'add skip:', name
         self.skiplist.append(re.compile(fnmatch.translate(name)))
