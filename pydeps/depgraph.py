@@ -172,7 +172,7 @@ class GraphNode:
 
     def __str__(self):
         return self.src.name
-    
+
     def __repr__(self):
         return self.src.name
 
@@ -199,7 +199,7 @@ class Graph:
             "edges": [(u, v) for u, v in self.edges],
             "neighbours": {u.src.name: [v.src.name for v in self.neighbours[u]] for u in self.V}
         }
-    
+
     def __str__(self):
         return json.dumps(self, indent=4)
 
@@ -212,8 +212,8 @@ class Graph:
             if not visited[neighbour.index]:
                 self.dfs(neighbour, visited, stack)
         stack.append(v)
- 
-    
+
+
     def fill_order(self):
         def _fill_order(visited, stack):
             for i, node in enumerate(self.V):
@@ -240,10 +240,10 @@ class Graph:
     def kosaraju(self):
         stack = self.fill_order()
         transposed_graph = self.transpose()
-        
+
         visited = [False] * len(self.V)
         scc_list = []
-        
+
         while stack:
             node = stack.pop()  # popleft?
             if not visited[node.index]:
@@ -272,7 +272,7 @@ class DepGraph(object):
         self.cycles = []
         self.cyclenodes = set()
         self.cyclerelations = set()
-        
+
         self.max_module_depth = args.get('max_module_depth', 0)
         self.target = target
 
@@ -329,7 +329,7 @@ class DepGraph(object):
 
         # if self.args['show_cycles']:
         self.find_import_cycles()
-        
+
         if not self.args['show_deps']:
             cli.verbose(3, self)
 
@@ -338,7 +338,7 @@ class DepGraph(object):
         """
         res = name
         if name == "__main__" and self.target.is_pysource:
-            # use the target file name directly if we're working on a 
+            # use the target file name directly if we're working on a
             # single file
             return self.target.fname
 
