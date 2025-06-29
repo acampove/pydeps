@@ -79,13 +79,14 @@ class Source(object):
     def degree(self):
         return self.in_degree + self.out_degree
 
-    def is_noise(self):
-        """Is this module just noise?  (too common either at top or bottom of
-           the graph).
+    def is_noise(self) -> bool:
+        """
+        Is this module just noise?  (too common either at top or bottom of the graph).
         """
         noise = self.args['noise_level']
         if not (self.in_degree and self.out_degree):
             return self.degree > noise
+
         return False
 
     def __json__(self):
