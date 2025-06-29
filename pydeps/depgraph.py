@@ -44,7 +44,6 @@ class Source(object):
     def __init__(self, name, path=None, imports=(), exclude=False, args=None):
         self.args = args or {}
         self.name = name
-        # self.kind = kind
         self.path = path             # needed here..?
         self.imports = set(imports)  # modules we import
         self.imported_by = set()     # modules that import us
