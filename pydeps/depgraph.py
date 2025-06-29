@@ -83,6 +83,15 @@ class Source(object):
         """
         Is this module just noise?  (too common either at top or bottom of the graph).
         """
+
+        # This is needed to avoid showing a package node
+        # when there is a module mode associated to the package i.e.
+        #
+        # mypkg        will appear, this has no dependents
+        # mypkg.module should appear alone
+        if len(self.imports) == 0 and '.' not in self.name:
+            return True
+
         noise = self.args['noise_level']
         if not (self.in_degree and self.out_degree):
             return self.degree > noise
